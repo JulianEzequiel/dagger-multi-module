@@ -6,11 +6,13 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.R
+import com.example.calculator.di.DaggerCalculatorComponent
 import com.example.calculator.usecase.SumUseCase
+import javax.inject.Inject
 
 class CalculatorActivity : AppCompatActivity() {
 
-    lateinit var sumUseCase: SumUseCase
+    @Inject lateinit var sumUseCase: SumUseCase
 
     lateinit var firstNumberEditText: EditText
     lateinit var secondNumberEditText: EditText
@@ -20,7 +22,8 @@ class CalculatorActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.acitivity_calculator)
 
-        sumUseCase = SumUseCase()
+        DaggerCalculatorComponent.builder().build()
+            .inject(this)
 
         bindViews()
         bindListeners()
