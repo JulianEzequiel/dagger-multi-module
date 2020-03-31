@@ -11,7 +11,7 @@ class SumUseCase(
         return if (firstNumber > 0 && secondNumber > 0) {
             Result.Success(firstNumber + secondNumber)
         } else {
-            Result.Failure(stringsProvider.getString(R.string.both_number_must_be_positive))
+            Result.Failure(stringsProvider.getString(R.string.both_numbers_must_be_positive))
         }
     }
 

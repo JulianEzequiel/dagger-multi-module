@@ -1,6 +1,7 @@
 package com.example.calculator.ui
 
 import android.os.Bundle
+import android.text.TextUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
@@ -37,18 +38,24 @@ class CalculatorActivity : AppCompatActivity() {
     }
 
     private fun calculateSum() {
-        val firstNumber = firstNumberEditText.text.toString().toInt()
-        val secondNumber = secondNumberEditText.text.toString().toInt()
+        val firstNumberString = firstNumberEditText.text.toString()
+        val secondNumberString = secondNumberEditText.text.toString()
 
-        sumUseCase.execute(firstNumber, secondNumber).let {
-            when (it) {
-                is Success -> resultTextView.text = it.result.toString()
-                is Failure -> showFailureMessage(it.message)
+        if(TextUtils.isEmpty(firstNumberString) ||
+                TextUtils.isEmpty(secondNumberString)) {
+            showFailureMessage(getString(R.string.both_numbers_must_have_value))
+        } else {
+            sumUseCase.execute(firstNumberString.toInt(), secondNumberString.toInt()).let {
+                when (it) {
+                    is Success -> resultTextView.text = it.result.toString()
+                    is Failure -> showFailureMessage(it.message)
+                }
             }
         }
     }
 
     private fun showFailureMessage(message: String) {
+        resultTextView.text = ""
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
