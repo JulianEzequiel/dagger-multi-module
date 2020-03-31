@@ -6,9 +6,8 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.ui.CalculatorActivity
-import com.example.core.di.CoreModule
 import com.example.core.modes.AppSuscription
-import com.example.multimodule.di.DaggerApplicationComponent
+import com.example.multimodule.di.provider.ApplicationComponentProvider
 import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
@@ -22,9 +21,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerApplicationComponent.builder()
-            .coreModule(CoreModule(application))
-            .build()
+        (application as ApplicationComponentProvider)
+            .getApplicationComponent()
             .inject(this)
 
         bindViews()
