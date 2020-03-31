@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">dagger-multimodule-app</string>
+    <string name="go_to_calculator">Calculator</string>
+    <string name="tools">Tools</string>
 </resources>

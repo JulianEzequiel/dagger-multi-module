@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">calculator</string>
+    <string name="insert_second_number_hint">Put another number here</string>
+    <string name="insert_first_number_hint">Put a number here</string>
+    <string name="calculate">Calculate sum!</string>
+    <string name="result">Result</string>
+</resources>

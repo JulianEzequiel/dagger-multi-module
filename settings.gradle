@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':calculator'
 rootProject.name='dagger-multimodule-app'
