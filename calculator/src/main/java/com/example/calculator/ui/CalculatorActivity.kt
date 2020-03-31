@@ -4,15 +4,19 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.R
 import com.example.calculator.di.DaggerCalculatorComponent
 import com.example.calculator.usecase.SumUseCase
+import com.example.calculator.usecase.SumUseCase.Result.Failure
+import com.example.calculator.usecase.SumUseCase.Result.Success
 import javax.inject.Inject
 
 class CalculatorActivity : AppCompatActivity() {
 
-    @Inject lateinit var sumUseCase: SumUseCase
+    @Inject
+    lateinit var sumUseCase: SumUseCase
 
     lateinit var firstNumberEditText: EditText
     lateinit var secondNumberEditText: EditText
@@ -32,8 +36,17 @@ class CalculatorActivity : AppCompatActivity() {
     private fun calculateSum() {
         val firstNumber = firstNumberEditText.text.toString().toInt()
         val secondNumber = secondNumberEditText.text.toString().toInt()
-        val result = sumUseCase.execute(firstNumber, secondNumber)
-        resultTextView.text = result.toString()
+
+        sumUseCase.execute(firstNumber, secondNumber).let {
+            when (it) {
+                is Success -> resultTextView.text = it.result.toString()
+                is Failure -> showFailureMessage(it.message)
+            }
+        }
+    }
+
+    private fun showFailureMessage(message: String) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
     private fun bindViews() {
