@@ -7,11 +7,11 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.calculator.R
-import com.example.calculator.di.CalculatorModule
 import com.example.calculator.di.DaggerCalculatorComponent
 import com.example.calculator.usecase.SumUseCase
 import com.example.calculator.usecase.SumUseCase.Result.Failure
 import com.example.calculator.usecase.SumUseCase.Result.Success
+import com.example.core.di.CoreModule
 import javax.inject.Inject
 
 class CalculatorActivity : AppCompatActivity() {
@@ -28,7 +28,7 @@ class CalculatorActivity : AppCompatActivity() {
         setContentView(R.layout.acitivity_calculator)
 
         DaggerCalculatorComponent.builder()
-            .calculatorModule(CalculatorModule(application))
+            .coreModule(CoreModule(application))
             .build()
             .inject(this)
 

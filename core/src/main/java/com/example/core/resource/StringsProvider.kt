@@ -1,4 +1,4 @@
-package com.example.calculator.utils
+package com.example.core.resource
 
 import android.app.Application
 import androidx.annotation.StringRes

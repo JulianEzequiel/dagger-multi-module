@@ -1,7 +1,7 @@
 package com.example.calculator.usecase
 
 import com.example.calculator.R
-import com.example.calculator.utils.StringsProvider
+import com.example.core.resource.StringsProvider
 
 class SumUseCase(
     val stringsProvider: StringsProvider
