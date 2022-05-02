@@ -7,13 +7,9 @@ import dagger.Provides
 import javax.inject.Singleton
 
 @Module
-class CoreModule(
-    val application: Application
-) {
+class CoreModule {
 
     @Provides
     @Singleton
-    fun stringsProvider() = StringsProvider(application)
-
-
+    fun stringsProvider(application: Application) = StringsProvider(application)
 }
